@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
   ArrowLeft,
@@ -8,8 +8,11 @@ import {
   CalendarDays,
   Check,
   CircleDollarSign,
+  Clock3,
+  CreditCard,
   FileText,
   Phone,
+  UserPlus,
   UserRound,
 } from "lucide-react";
 
@@ -64,6 +67,33 @@ const testimonials = [
   },
 ] as const;
 
+const frontOfficeItems = [
+  {
+    title: "Schedule Management",
+    description:
+      "Book, reschedule, and backfill cancellations automatically. Your team stays focused on patients, not the schedule.",
+    icon: CalendarDays,
+  },
+  {
+    title: "Referrals",
+    description:
+      "Every new patient referral gets a follow-up. Clarion reaches out, answers questions, and gets them scheduled.",
+    icon: UserPlus,
+  },
+  {
+    title: "Billing and Insurance",
+    description:
+      "Coverage questions and payments handled through natural conversations. No hold music, no back-and-forth.",
+    icon: CreditCard,
+  },
+  {
+    title: "24/7 Patient Support",
+    description:
+      "Refill requests, post-visit check-ins, and after-hours questions. Clarion handles them around the clock.",
+    icon: Clock3,
+  },
+] as const;
+
 export const Features = () => {
   return (
     <>
@@ -76,9 +106,15 @@ export const Features = () => {
         </div>
       </section>
 
-      <section className="border-t border-[#d8d1bf] bg-brand-ivory px-4 text-brand-cocoa">
+      <section className="border-y border-[#d8d1bf] bg-brand-ivory px-4 text-brand-cocoa">
         <div className="container mx-auto  border-x border-brand-border bg-brand-ivory">
           <ProviderImpact />
+        </div>
+      </section>
+
+      <section className="mt-16 border-y border-[#d8d1bf] bg-brand-ivory px-4 text-brand-cocoa">
+        <div className="container mx-auto border-x border-brand-border bg-brand-ivory">
+          <FrontOfficeEngine />
         </div>
       </section>
     </>
@@ -244,6 +280,99 @@ function TestimonialBand() {
           ))}
         </div>
       </div>
+    </div>
+  );
+}
+
+function FrontOfficeEngine() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [progressKey, setProgressKey] = useState(0);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      setActiveIndex((current) => (current + 1) % frontOfficeItems.length);
+      setProgressKey((current) => current + 1);
+    }, 4000);
+
+    return () => window.clearTimeout(timer);
+  }, [activeIndex, progressKey]);
+
+  const setActiveItem = (index: number) => {
+    setActiveIndex(index);
+    setProgressKey((current) => current + 1);
+  };
+
+  return (
+    <div className="grid min-h-[760px] lg:grid-cols-[1fr_1fr]">
+      <div className="flex flex-col border-b border-brand-border px-8 py-14 lg:border-b-0 lg:border-r md:px-12 lg:px-14">
+        <div>
+          <h2 className="font-clarion-display text-4xl font-light leading-tight tracking-normal text-brand-cocoa md:whitespace-nowrap md:text-5xl">
+            Your front office revenue engine
+          </h2>
+          <p className="mt-4 max-w-2xl font-clarion-body text-lg leading-7 text-brand-muted">
+            Everything your front office handles today, done automatically and
+            at any hour.
+          </p>
+        </div>
+
+        <div className="mt-auto space-y-6 pt-16">
+          {frontOfficeItems.map((item, index) => {
+            const Icon = item.icon;
+            const isActive = activeIndex === index;
+
+            return (
+              <button
+                type="button"
+                key={item.title}
+                onClick={() => setActiveItem(index)}
+                className="group grid w-full grid-cols-[56px_1fr] gap-6 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange"
+                aria-current={isActive ? "true" : undefined}
+              >
+                <span
+                  className={`flex size-14 items-center justify-center ${
+                    isActive ? " text-brand-cocoa" : " text-brand-muted"
+                  }`}
+                >
+                  <Icon className="size-6" />
+                </span>
+                <span className="block border-b border-transparent pb-4">
+                  <span
+                    className={`block font-clarion-body text-2xl leading-8 transition-colors ${
+                      isActive
+                        ? "text-brand-cocoa"
+                        : "text-brand-muted group-hover:text-brand-cocoa"
+                    }`}
+                  >
+                    {item.title}
+                  </span>
+                  {isActive ? (
+                    <>
+                      <span className="mt-3 block max-w-xl font-clarion-body text-lg leading-7 text-brand-muted">
+                        {item.description}
+                      </span>
+                      <span className="mt-3 block h-px max-w-[505px] overflow-hidden bg-brand-border">
+                        <span
+                          key={progressKey}
+                          className="block h-full origin-left animate-[front-office-progress_4s_linear_forwards] bg-brand-orange"
+                        />
+                      </span>
+                    </>
+                  ) : null}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      <div
+        className="relative min-h-[620px] overflow-hidden bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: "url('/image/wefrge-dashboard-mockup.webp')",
+        }}
+        aria-label="WeForge dashboard mockup"
+        role="img"
+      />
     </div>
   );
 }
