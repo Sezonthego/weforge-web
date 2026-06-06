@@ -2,9 +2,29 @@
 @import "tw-animate-css";
 @custom-variant dark (&:where(.dark, .dark *));
 
+@font-face {
+  font-family: "Moderat Serif Trial";
+  src: url("https://cdn.prod.website-files.com/672129b642cb0117f4c53944/67212dac7895d1da56569225_Moderat-Serif-Trial-Light.otf")
+    format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Clarion Geist";
+  src: url("https://cdn.prod.website-files.com/672129b642cb0117f4c53944/67212dc115a0c098d32efe90_GeistVF.ttf")
+    format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --inter: var(--font-inter);
   --manrope: var(--font-manrope);
+  --font-clarion-serif: "Moderat Serif Trial", Georgia, "Times New Roman", serif;
+  --font-clarion-sans: "Clarion Geist", var(--font-manrope), sans-serif;
   --radius: 0.625rem;
   --brand-orange: #ff4f00;
   --brand-ivory: #fffdf9;
@@ -100,6 +120,8 @@
   --color-foreground: var(--foreground);
   --font-inter: var(--font-inter);
   --font-display: var(--font-manrope);
+  --font-clarion-display: var(--font-clarion-serif);
+  --font-clarion-body: var(--font-clarion-sans);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);

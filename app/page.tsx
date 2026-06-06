@@ -6,7 +6,6 @@ import { FeaturesTertiary } from "@/components/features-tertiary";
 import { Footer } from "@/components/footer";
 import { Hero3DStage } from "@/components/hero-3d-stage";
 import { InsightsPreview } from "@/components/insights-preview";
-import { LogoCloud } from "@/components/logo-cloud";
 import ProductPillars from "@/components/ProductPillars";
 import { TherapeuticAreasSection } from "@/components/therapeutic-areas-section";
 import Agent from "@/components/agent";
@@ -16,7 +15,6 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       <Hero3DStage />
-      <LogoCloud />
       <Features />
       {/* <ParticipantJourneySection /> */}
       <Agent />

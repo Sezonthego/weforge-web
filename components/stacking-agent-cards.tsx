@@ -9,7 +9,7 @@ type RecruitmentSystem = {
   desc: string
   highlights: [string, string]
   img: string
-  plannedImg: string
+  plannedImg?: string
   alt: string
 }
 
