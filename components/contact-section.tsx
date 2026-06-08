@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { ArrowRight, CheckCircle2, Mail, MapPin, Phone } from "lucide-react";
+
 import { Container } from "./container";
-import { Heading } from "./heading";
-import { SubHeading } from "./subheading";
 import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
 
@@ -64,154 +64,176 @@ export const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="bg-brand-ivory py-10 md:py-20 lg:pt-32 px-4">
+    <section
+      id="contact"
+      className="bg-brand-ivory border-y border-brand-border px-4 my-8 md:my-28"
+    >
       <Container>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-wider text-brand-orange">
-              Get in touch
-            </p>
-            <Heading className="mt-4 mb-4" as="h2">
-              We&apos;re one click away.
-            </Heading>
-            <SubHeading className="max-w-lg">
-              Let&apos;s discuss your recruitment challenges, operational goals,
-              and how WeForge can support your clinical operations.
-            </SubHeading>
+        <div className="grid border-x border-brand-border lg:grid-cols-[0.9fr_1.1fr]">
+          <div className="relative overflow-hidden border-brand-border py-10 lg:border-r lg:px-10 lg:py-14">
+            <div
+              aria-hidden="true"
+              className="absolute -left-28 top-20 size-72 rounded-full bg-brand-orange/12 blur-3xl"
+            />
+            <div
+              aria-hidden="true"
+              className="absolute bottom-0 right-0 size-64 rounded-full bg-brand-indigo/10 blur-3xl"
+            />
 
-            <ul className="mt-10 space-y-4 text-brand-muted">
-              <li>
-                <span className="block text-sm text-brand-muted">
-                  Email
-                </span>
-                <a
+            <div className="relative max-w-xl">
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-brand-orange">
+                Get in touch
+              </p>
+              <h2 className="mt-5 font-clarion-display text-4xl font-light leading-tight text-brand-cocoa md:text-6xl">
+                We&apos;re one click away.
+              </h2>
+              <p className="mt-6 text-lg leading-8 text-brand-muted">
+                Let&apos;s discuss your recruitment challenges, operational
+                goals, and how WeForge can support your clinical operations.
+              </p>
+
+              <ul className="mt-10 divide-y divide-brand-border border-y border-brand-border">
+                <ContactDetail
+                  icon={<Mail className="size-5" />}
+                  label="Email"
+                  value="contact@weforgeclinical.com"
                   href="mailto:contact@weforgeclinical.com"
-                  className="font-medium text-brand-cocoa hover:text-brand-orange hover:underline"
-                >
-                  contact@weforgeclinical.com
-                </a>
-              </li>
-              <li>
-                <span className="block text-sm text-brand-muted">
-                  Phone
-                </span>
-                <a
+                />
+                <ContactDetail
+                  icon={<Phone className="size-5" />}
+                  label="Phone"
+                  value="+48 792 586 357"
                   href="tel:+48792586357"
-                  className="font-medium text-brand-cocoa hover:text-brand-orange hover:underline"
-                >
-                  +48 792 586 357
-                </a>
-              </li>
-              <li>
-                <span className="block text-sm text-brand-muted">
-                  Location
-                </span>
-                <span className="font-medium text-brand-cocoa">
-                  Warsaw, Poland
-                </span>
-              </li>
-            </ul>
+                />
+                <ContactDetail
+                  icon={<MapPin className="size-5" />}
+                  label="Location"
+                  value="Warsaw, Poland"
+                />
+              </ul>
+            </div>
           </div>
 
-          <div className="rounded-3xl border border-brand-border bg-brand-peach p-6 md:p-10">
-            {status === "success" ? (
-              <div className="py-8 text-center">
-                <h3 className="text-xl font-bold font-display text-brand-cocoa">
-                  Thank you for reaching out!
-                </h3>
-                <p className="mt-3 text-brand-muted">
-                  Our team has received your message and will get back to you as
-                  soon as possible.
-                </p>
-                <Button
-                  type="button"
-                  variant="outline"
-                  className="mt-8"
-                  onClick={() => setStatus("idle")}
-                >
-                  Send another message
-                </Button>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-                <Field label="Name" required>
-                  <input
-                    type="text"
-                    name="name"
-                    required
-                    value={form.name}
-                    onChange={(e) =>
-                      setForm((f) => ({ ...f, name: e.target.value }))
-                    }
-                    className={inputClass}
-                    placeholder="Your name"
-                  />
-                </Field>
+          <div className="bg-brand-peach/35 p-4 md:p-8 lg:p-10">
+            <div className="relative overflow-hidden border border-brand-border bg-brand-ivory p-5 md:p-8">
+              <div
+                aria-hidden="true"
+                className="absolute inset-x-0 top-0 h-32 bg-[radial-gradient(ellipse_at_50%_0%,rgba(255,79,0,0.13),transparent_70%)]"
+              />
+              <div className="relative">
+                {status === "success" ? (
+                  <div className="flex min-h-[460px] flex-col items-center justify-center py-8 text-center">
+                    <div className="flex size-14 items-center justify-center rounded-full bg-brand-orange text-brand-ivory">
+                      <CheckCircle2 className="size-7" strokeWidth={1.8} />
+                    </div>
+                    <h3 className="mt-6 font-clarion-display text-3xl font-light text-brand-cocoa md:text-4xl">
+                      Thank you for reaching out.
+                    </h3>
+                    <p className="mt-4 max-w-md text-brand-muted">
+                      Our team has received your message and will get back to
+                      you as soon as possible.
+                    </p>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      className="mt-8"
+                      onClick={() => setStatus("idle")}
+                    >
+                      Send another message
+                    </Button>
+                  </div>
+                ) : (
+                  <form onSubmit={handleSubmit} className="grid gap-5">
+                    <div>
+                      <p className="text-sm font-semibold uppercase tracking-[0.18em] text-brand-orange">
+                        Start the conversation
+                      </p>
+                      <h3 className="mt-3 font-clarion-display text-3xl font-light text-brand-cocoa md:text-4xl">
+                        Tell us what you need.
+                      </h3>
+                    </div>
 
-                <Field label="Email" required>
-                  <input
-                    type="email"
-                    name="email"
-                    required
-                    value={form.email}
-                    onChange={(e) =>
-                      setForm((f) => ({ ...f, email: e.target.value }))
-                    }
-                    className={inputClass}
-                    placeholder="you@company.com"
-                  />
-                </Field>
+                    <Field label="Name" required>
+                      <input
+                        type="text"
+                        name="name"
+                        required
+                        value={form.name}
+                        onChange={(e) =>
+                          setForm((f) => ({ ...f, name: e.target.value }))
+                        }
+                        className={inputClass}
+                        placeholder="Your name"
+                      />
+                    </Field>
 
-                <Field label="Which best describes you?">
-                  <select
-                    name="role"
-                    value={form.role}
-                    onChange={(e) =>
-                      setForm((f) => ({ ...f, role: e.target.value }))
-                    }
-                    className={cn(inputClass, "appearance-none")}
-                  >
-                    {roleOptions.map((opt) => (
-                      <option key={opt.value} value={opt.value}>
-                        {opt.label}
-                      </option>
-                    ))}
-                  </select>
-                </Field>
+                    <Field label="Email" required>
+                      <input
+                        type="email"
+                        name="email"
+                        required
+                        value={form.email}
+                        onChange={(e) =>
+                          setForm((f) => ({ ...f, email: e.target.value }))
+                        }
+                        className={inputClass}
+                        placeholder="you@company.com"
+                      />
+                    </Field>
 
-                <Field label="Message">
-                  <textarea
-                    name="message"
-                    rows={4}
-                    value={form.message}
-                    onChange={(e) =>
-                      setForm((f) => ({ ...f, message: e.target.value }))
-                    }
-                    className={cn(inputClass, "resize-y min-h-[120px]")}
-                    placeholder="Tell us about your recruitment goals..."
-                  />
-                </Field>
+                    <Field label="Which best describes you?">
+                      <select
+                        name="role"
+                        value={form.role}
+                        onChange={(e) =>
+                          setForm((f) => ({ ...f, role: e.target.value }))
+                        }
+                        className={cn(inputClass, "appearance-none")}
+                      >
+                        {roleOptions.map((opt) => (
+                          <option key={opt.value} value={opt.value}>
+                            {opt.label}
+                          </option>
+                        ))}
+                      </select>
+                    </Field>
 
-                {status === "error" && errorMessage && (
-                  <p className="text-sm text-destructive" role="alert">
-                    {errorMessage}
-                  </p>
+                    <Field label="Message">
+                      <textarea
+                        name="message"
+                        rows={4}
+                        value={form.message}
+                        onChange={(e) =>
+                          setForm((f) => ({ ...f, message: e.target.value }))
+                        }
+                        className={cn(inputClass, "min-h-[132px] resize-y")}
+                        placeholder="Tell us about your recruitment goals..."
+                      />
+                    </Field>
+
+                    {status === "error" && errorMessage && (
+                      <p className="text-sm text-destructive" role="alert">
+                        {errorMessage}
+                      </p>
+                    )}
+
+                    <p className="text-xs leading-5 text-brand-muted">
+                      By submitting you agree with our Privacy Policy &amp;
+                      Terms &amp; Conditions.
+                    </p>
+
+                    <Button
+                      type="submit"
+                      className="w-full bg-brand-cocoa shadow-brand hover:bg-brand-orange sm:w-auto"
+                      disabled={status === "submitting"}
+                    >
+                      {status === "submitting" ? "Sending..." : "Send message"}
+                      <ArrowRight className="size-4" />
+                    </Button>
+                  </form>
                 )}
-
-                <p className="text-xs text-brand-muted">
-                  By submitting you agree with our Privacy Policy &amp; Terms
-                  &amp; Conditions.
-                </p>
-
-                <Button
-                  type="submit"
-                  className="shadow-brand w-full sm:w-auto"
-                  disabled={status === "submitting"}
-                >
-                  {status === "submitting" ? "Sending..." : "Send message"}
-                </Button>
-              </form>
-            )}
+              </div>
+            </div>
           </div>
         </div>
       </Container>
@@ -220,7 +242,50 @@ export const ContactSection = () => {
 };
 
 const inputClass =
-  "w-full rounded-lg border border-brand-border bg-brand-ivory px-4 py-2.5 text-sm text-brand-cocoa placeholder:text-brand-muted/60 outline-none focus-visible:ring-2 focus-visible:ring-brand-orange";
+  "w-full border border-brand-border bg-brand-ivory px-4 py-3 text-sm text-brand-cocoa placeholder:text-brand-muted/60 outline-none transition-colors focus:border-brand-orange focus-visible:ring-2 focus-visible:ring-brand-orange/25";
+
+function ContactDetail({
+  icon,
+  label,
+  value,
+  href,
+}: {
+  icon: React.ReactNode;
+  label: string;
+  value: string;
+  href?: string;
+}) {
+  const content = (
+    <>
+      <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-brand-peach text-brand-orange">
+        {icon}
+      </span>
+      <span>
+        <span className="block text-xs font-semibold uppercase tracking-[0.16em] text-brand-muted">
+          {label}
+        </span>
+        <span className="mt-1 block font-medium text-brand-cocoa">
+          {value}
+        </span>
+      </span>
+    </>
+  );
+
+  return (
+    <li>
+      {href ? (
+        <a
+          href={href}
+          className="flex items-center gap-4 py-5 transition-colors hover:text-brand-orange"
+        >
+          {content}
+        </a>
+      ) : (
+        <div className="flex items-center gap-4 py-5">{content}</div>
+      )}
+    </li>
+  );
+}
 
 function Field({
   label,

@@ -99,7 +99,7 @@ export const Features = () => {
     <>
       <section
         id="features"
-        className="mt-8d border-t border-[#d8d1bf] bg-brand-ivory px-4 text-brand-cocoa md:mt-28 md:pb-24d"
+        className="mt-8 border-t border-[#d8d1bf] bg-brand-ivory px-4 text-brand-cocoa md:mt-28 md:pb-24d"
       >
         <div className="container mx-auto  border-x border-brand-border bg-brand-ivory">
           <ScaleYourPractice />

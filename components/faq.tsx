@@ -1,15 +1,11 @@
 "use client";
 
 import { motion } from "motion/react";
-import { FAQIcon } from "@/icons";
-import { Container } from "./container";
-import { Heading } from "./heading";
-import { SubHeading } from "./subheading";
 import { useState } from "react";
-import { IconMinus, IconPlus } from "@tabler/icons-react";
+import { Minus, Plus } from "lucide-react";
+
+import { Container } from "./container";
 import { cn } from "@/lib/utils";
-import { Button } from "./ui/button";
-import Link from "next/link";
 
 const faqItems = [
   {
@@ -41,50 +37,80 @@ const faqItems = [
 
 export const FAQ = () => {
   return (
-    <section id="faq" className="bg-brand-ivory pt-10 md:pt-20 lg:pt-32 px-4 overflow-hidden">
+    <section
+      id="faq"
+      className="bg-brand-ivory border-y border-brand-border px-4 my-8 md:my-28"
+    >
       <Container>
-        <FAQIcon />
-        <p className="mt-6 text-sm font-semibold uppercase tracking-wider text-brand-orange">
-          FAQ
-        </p>
-        <Heading className="mt-4 mb-4 md:mb-6">Clarity above everything.</Heading>
-        <SubHeading className="mb-10 md:mb-20 max-w-2xl">
-          Clear answers to help you better understand how WeForge operates and
-          supports modern clinical recruitment workflows.
-        </SubHeading>
-        <div className="flex flex-col gap-4">
-          {faqItems.map((item) => (
-            <Question
-              key={item.question}
-              question={item.question}
-              answer={item.answer}
+        <div className="grid gap-10 border-x border-brand-border lg:grid-cols-[0.9fr_1.35fr] lg:gap-0">
+          <div className="relative overflow-hidden border-brand-border py-10 lg:border-r lg:px-10 lg:py-14">
+            <div
+              aria-hidden="true"
+              className="absolute -left-28 top-16 size-72 rounded-full bg-brand-orange/12 blur-3xl"
             />
-          ))}
+            <div className="relative max-w-xl">
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-brand-orange">
+                FAQ
+              </p>
+              <h2 className="mt-5 font-clarion-display text-4xl font-light leading-tight text-brand-cocoa md:text-6xl">
+                Clarity above everything.
+              </h2>
+              <p className="mt-6 text-lg leading-8 text-brand-muted">
+                Clear answers on how WeForge designs, launches, and operates
+                clinical recruitment workflows with less friction.
+              </p>
+            </div>
+          </div>
+
+          <div className="divide-y divide-brand-border lg:py-6">
+            {faqItems.map((item, index) => (
+              <Question
+                key={item.question}
+                index={index + 1}
+                question={item.question}
+                answer={item.answer}
+              />
+            ))}
+          </div>
         </div>
 
-        <div className="mt-16 md:mt-24 rounded-3xl bg-brand-peach p-8 md:p-12 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-          <div className="max-w-xl">
-            <h3 className="text-xl md:text-2xl font-bold font-display text-brand-cocoa">
-              Still have questions?
-            </h3>
-            <p className="mt-3 text-brand-muted">
-              Our team is available to answer any question you may have. It only
-              takes a button click to start the conversation.
-            </p>
+        {/* <div className="relative mt-10 overflow-hidden border border-brand-border bg-brand-peach/60 p-6 md:mt-14 md:p-8">
+          <div
+            aria-hidden="true"
+            className="absolute inset-y-0 right-0 w-1/2 bg-[radial-gradient(ellipse_at_90%_50%,rgba(255,79,0,0.16),transparent_68%)]"
+          />
+          <div className="relative flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+            <div className="max-w-xl">
+              <h3 className="font-clarion-display text-3xl font-light text-brand-cocoa md:text-4xl">
+                Still have questions?
+              </h3>
+              <p className="mt-3 text-base leading-7 text-brand-muted">
+                Our team is available to answer any question you may have. It
+                only takes a button click to start the conversation.
+              </p>
+            </div>
+            <Button
+              asChild
+              className="w-full shrink-0 bg-brand-cocoa hover:bg-brand-orange md:w-auto"
+            >
+              <Link href="#contact">
+                Let&apos;s chat
+                <ArrowRight className="size-4" />
+              </Link>
+            </Button>
           </div>
-          <Button asChild className=" shrink-0 w-full md:w-auto">
-            <Link href="#contact">Let&apos;s chat</Link>
-          </Button>
-        </div>
+        </div> */}
       </Container>
     </section>
   );
 };
 
 const Question = ({
+  index,
   question,
   answer,
 }: {
+  index: number;
   question?: string;
   answer?: string;
 }) => {
@@ -94,24 +120,32 @@ const Question = ({
     <button
       type="button"
       onClick={() => setOpen(!open)}
-      className="w-full p-4 md:p-8 bg-brand-peach overflow-hidden rounded-3xl text-left"
+      aria-expanded={open}
+      className="group w-full overflow-hidden px-0 py-6 text-left transition-colors  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange focus-visible:ring-offset-2 focus-visible:ring-offset-brand-ivory md:px-8 md:py-7"
     >
       <div className="flex items-center justify-between gap-4">
-        <h3 className="text-brand-cocoa text-lg md:text-2xl font-bold font-display">
-          {question}
-        </h3>
-        <div className="size-6 relative rounded-full bg-brand-orange flex items-center justify-center shrink-0">
-          <IconPlus
+        <div className="flex min-w-0 items-start gap-4 md:gap-6">
+          <span className="mt-1 font-clarion-display text-2xl font-light leading-none text-brand-orange md:text-3xl">
+            {String(index).padStart(2, "0")}
+          </span>
+          <h3 className="text-lg font-semibold leading-snug text-brand-cocoa md:text-2xl">
+            {question}
+          </h3>
+        </div>
+        <div className="relative flex size-9 shrink-0 items-center justify-center rounded-full border border-brand-border bg-brand-ivory text-brand-cocoa transition-colors group-hover:border-brand-orange group-hover:text-brand-orange">
+          <Plus
             className={cn(
-              "text-brand-ivory size-6 absolute inset-0 transition-all duration-200",
+              "absolute size-4 transition-all duration-200",
               open && "scale-0 rotate-90"
             )}
+            strokeWidth={2}
           />
-          <IconMinus
+          <Minus
             className={cn(
-              "text-brand-ivory size-6 absolute inset-0 scale-0 -rotate-90 transition-all duration-200",
+              "absolute size-4 scale-0 -rotate-90 transition-all duration-200",
               open && "scale-100 rotate-0"
             )}
+            strokeWidth={2}
           />
         </div>
       </div>
@@ -143,7 +177,7 @@ const Question = ({
             delay: 0.2,
             ease: "easeInOut",
           }}
-          className="text-left mt-4 text-brand-muted"
+          className="mt-5 max-w-3xl pl-12 text-left text-base leading-7 text-brand-muted md:pl-[4.5rem] md:text-lg"
         >
           {answer}
         </motion.p>
